@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>United Utilities – Improved Homepage Mockup</title>
+    <style>
+      /*
+       * ═══════════════════════════════════════════════════════════════════════
+       * IMPROVED HOMEPAGE MOCKUP – United Utilities
+       * Implements all 5 recommendations from the UX audit
+       * ═══════════════════════════════════════════════════════════════════════
+       */
+
+      :root {
+        /* ───────── Primary (blue = trust, water, primary actions) ───────── */
+        --primary:          #0078a8;
+        --primary-dark:     #005f85;
+        --primary-light:    #3b9fc9;
+        --primary-tint:     #e6f4f9;
+
+        /* ───────── Secondary (teal/green = eco, savings) ───────── */
+        --secondary:        #024e43;
+        --secondary-light:  #2e7a6e;
+        --secondary-tint:   #e5f0ee;
+
+        /* ───────── Accent (for urgent/critical notices) ───────── */
+        --accent:           #d00068;
+        --accent-tint:      #fce8f2;
+
+        /* ───────── Neutrals ───────── */
+        --white:            #ffffff;
+        --surface:          #f5f7f9;
+        --border:           #dce1e6;
+        --muted:            #6b7785;
+        --text:             #1e2a36;
+        --black:            #0d1117;
+
+        /* ───────── Semantic ───────── */
+        --success:          #0a8754;
+        --warning:          #c57c00;
+        --error:            #c5221f;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: var(--white);
+        color: var(--text);
+        line-height: 1.55;
+      }
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         RECOMMENDATION BADGE (for demo purposes)
+         ═══════════════════════════════════════════════════════════════════════ */
+      .rec-badge {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background: var(--accent);
+        color: var(--white);
+        padding: 3px 8px;
+        border-radius: 4px;
+        margin-left: 8px;
+        vertical-align: middle;
+      }
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         SKIP LINKS (Recommendation 5: Accessibility)
+         ═══════════════════════════════════════════════════════════════════════ */
+      .skip-link {
+        position: absolute;
+        top: -100px;
+        left: 16px;
+        background: var(--primary);
+        color: var(--white);
+        padding: 12px 20px;
+        border-radius: 6px;
+        z-index: 9999;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .skip-link:focus {
+        top: 16px;
+        outline: 3px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         HEADER (Recommendation 1: Simplified Navigation)
+         ═══════════════════════════════════════════════════════════════════════ */
+      header {
+        background: var(--primary-dark);
+        color: var(--white);
+      }
+
+      .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 24px;
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--white);
+        text-decoration: none;
+      }
+
+      .logo svg {
+        width: 36px;
+        height: 36px;
+        fill: var(--white);
+      }
+
+      /* Secondary nav (Corporate/Business moved here per Rec 1) */
+      .secondary-nav {
+        display: flex;
+        gap: 20px;
+        font-size: 13px;
+      }
+
+      .secondary-nav a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+      }
+
+      .secondary-nav a:hover,
+      .secondary-nav a:focus {
+        color: var(--white);
+        text-decoration: underline;
+      }
+
+      /* Account button (merged entry point per Rec 1) */
+      .account-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--white);
+        color: var(--primary-dark);
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        text-decoration: none;
+        transition: background 0.15s, transform 0.1s;
+      }
+
+      .account-btn:hover {
+        background: var(--primary-tint);
+      }
+
+      .account-btn:focus {
+        outline: 3px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .account-btn svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      /* Primary navigation (residential-focused per Rec 1) */
+      .primary-nav {
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .primary-nav-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 4px;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 16px 18px;
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 15px;
+        border-bottom: 3px solid transparent;
+        transition: border-color 0.15s, background 0.15s;
+      }
+
+      .nav-links a:hover,
+      .nav-links a:focus {
+        background: var(--surface);
+        border-bottom-color: var(--primary);
+      }
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         SEARCH BAR (Recommendation 2: Improve Discoverability)
+         ═══════════════════════════════════════════════════════════════════════ */
+      .search-bar {
+        position: relative;
+        width: 320px;
+      }
+
+      .search-bar input {
+        width: 100%;
+        padding: 12px 16px 12px 44px;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        font-size: 14px;
+        transition: border-color 0.15s, box-shadow 0.15s;
+      }
+
+      .search-bar input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px var(--primary-tint);
+      }
+
+      .search-bar input::placeholder {
+        color: var(--muted);
+      }
+
+      .search-bar svg {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        color: var(--muted);
+      }
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         INCIDENT ALERT (Recommendation 2: Clear incident checker)
+         ═══════════════════════════════════════════════════════════════════════ */
+      .incident-banner {
+        background: var(--accent-tint);
+        border-bottom: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+      }
+
+      .incident-banner-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 14px 24px;
+      }
+
+      .incident-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .incident-icon {
+        width: 24px;
+        height: 24px;
+        color: var(--accent);
+      }
+
+      .incident-text strong {
+        color: var(--accent);
+      }
+
+      .incident-actions {
+        display: flex;
+        gap: 12px;
+      }
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         BUTTONS (Recommendation 4 & 5: Consistent styles, blue=primary, green=savings)
+         ═══════════════════════════════════════════════════════════════════════ */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: background 0.15s, transform 0.1s;
+      }
+
+      .btn:focus {
+        outline: 3px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .btn:active {
+        transform: scale(0.98);
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: var(--white);
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-dark);
+      }
+
+      .btn-secondary {
+        background: var(--secondary);
+        color: var(--white);
+      }
+
+      .btn-secondary:hover {
+        background: var(--secondary-light);
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+      }
+
+      .btn-outline:hover {
+        background: var(--primary-tint);
+      }
+
+      .btn-sm {
+        padding: 8px 16px;
+        font-size: 13px;
+      }
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         HERO SECTION (Recommendation 3: Primary tasks above fold)
+         ═══════════════════════════════════════════════════════════════════════ */
+      .hero {
+        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+        color: var(--white);
+        padding: 48px 24px 56px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Water wave decoration (Recommendation 4: thematic graphics) */
+      .hero::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23ffffff' d='M0,64L60,69.3C120,75,240,85,360,80C480,75,600,53,720,48C840,43,960,53,1080,58.7C1200,64,1320,64,1380,64L1440,64L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z'%3E%3C/path%3E%3C/svg%3E")
+          no-repeat bottom center;
+        background-size: cover;
+      }
+
+      .hero-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero h1 {
+        font-size: 2.25rem;
+        margin: 0 0 8px;
+        font-weight: 700;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin: 0 0 28px;
+        max-width: 540px;
+      }
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         POSTCODE CHECKER (Recommendation 2: Separate inputs from actions)
+         ═══════════════════════════════════════════════════════════════════════ */
+      .postcode-checker {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        max-width: 520px;
+      }
+
+      .postcode-checker input {
+        flex: 1;
+        min-width: 200px;
+        padding: 14px 18px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+      }
+
+      .postcode-checker input:focus {
+        outline: 3px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .postcode-checker .btn {
+        white-space: nowrap;
+      }
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         TASK CARDS (Recommendation 3: Task-oriented cards with clear CTAs)
+         ═══════════════════════════════════════════════════════════════════════ */
+      .section {
+        padding: 48px 24px;
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        color: var(--black);
+        margin: 0;
+      }
+
+      .task-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .task-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        transition: box-shadow 0.2s, transform 0.15s;
+      }
+
+      .task-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+      }
+
+      .task-card:focus-within {
+        outline: 3px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      .task-icon {
+        width: 48px;
+        height: 48px;
+        background: var(--primary-tint);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+      }
+
+      .task-icon svg {
+        width: 24px;
+        height: 24px;
+        color: var(--primary);
+      }
+
+      .task-icon.green {
+        background: var(--secondary-tint);
+      }
+
+      .task-icon.green svg {
+        color: var(--secondary);
+      }
+
+      .task-card h3 {
+        font-size: 1.1rem;
+        margin: 0 0 8px;
+        color: var(--black);
+      }
+
+      .task-card p {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 14px;
+        flex-grow: 1;
+      }
+
+      .task-card .btn {
+        align-self: flex-start;
+      }
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         SAVINGS SECTION (Recommendation 4: Green for savings)
+         ═══════════════════════════════════════════════════════════════════════ */
+      .savings-section {
+        background: var(--secondary-tint);
+        padding: 48px 24px;
+      }
+
+      .savings-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      .savings-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+        margin-top: 24px;
+      }
+
+      .savings-card {
+        background: var(--white);
+        border-radius: 12px;
+        padding: 24px;
+        text-align: center;
+        border: 2px solid transparent;
+        transition: border-color 0.2s;
+      }
+
+      .savings-card:hover {
+        border-color: var(--secondary);
+      }
+
+      .savings-card svg {
+        width: 40px;
+        height: 40px;
+        color: var(--secondary);
+        margin-bottom: 12px;
+      }
+
+      .savings-card h3 {
+        margin: 0 0 8px;
+        color: var(--black);
+      }
+
+      .savings-card p {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         HELP SECTION (Recommendation 3: Group by user goals)
+         ═══════════════════════════════════════════════════════════════════════ */
+      .help-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+
+      .help-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px;
+        background: var(--surface);
+        border-radius: 10px;
+        text-decoration: none;
+        color: var(--text);
+        font-weight: 500;
+        transition: background 0.15s;
+      }
+
+      .help-link:hover {
+        background: var(--primary-tint);
+      }
+
+      .help-link:focus {
+        outline: 3px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      .help-link svg {
+        width: 24px;
+        height: 24px;
+        color: var(--primary);
+        flex-shrink: 0;
+      }
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         FOOTER (Recommendation 1 & 5: Consistent, accessible)
+         ═══════════════════════════════════════════════════════════════════════ */
+      footer {
+        background: var(--primary-dark);
+        color: var(--white);
+        padding: 48px 24px 24px;
+      }
+
+      .footer-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 32px;
+        margin-bottom: 32px;
+      }
+
+      .footer-col h4 {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0 0 16px;
+        opacity: 0.8;
+      }
+
+      .footer-col ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .footer-col li {
+        margin-bottom: 10px;
+      }
+
+      .footer-col a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      .footer-col a:hover,
+      .footer-col a:focus {
+        color: var(--white);
+        text-decoration: underline;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        padding-top: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        font-size: 13px;
+        opacity: 0.8;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+      }
+
+      .footer-links a:hover {
+        text-decoration: underline;
+      }
+
+      /* ═══════════════════════════════════════════════════════════════════════
+         DEMO ANNOTATIONS (shows which recommendation applies)
+         ═══════════════════════════════════════════════════════════════════════ */
+      .demo-banner {
+        background: linear-gradient(90deg, var(--accent) 0%, #8b0040 100%);
+        color: var(--white);
+        text-align: center;
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+
+      .demo-banner strong {
+        font-weight: 700;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .header-top {
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+
+        .secondary-nav {
+          display: none;
+        }
+
+        .primary-nav-inner {
+          flex-direction: column;
+          gap: 12px;
+          padding: 12px 24px;
+        }
+
+        .search-bar {
+          width: 100%;
+        }
+
+        .nav-links {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .hero h1 {
+          font-size: 1.75rem;
+        }
+
+        .postcode-checker {
+          flex-direction: column;
+        }
+
+        .incident-banner-inner {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Skip link for keyboard users (Rec 5) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Demo banner -->
+    <div class="demo-banner">
+      <strong>MOCKUP:</strong> Improved Homepage – Implements all 5 UX Recommendations
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════════════
+         HEADER (Rec 1: Simplified Navigation)
+         ════════════════════════════════════════════════════════════════════════ -->
+    <header>
+      <div class="header-top">
+        <a href="#" class="logo" aria-label="United Utilities Home">
+          <!-- Water drop SVG -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 2C12 2 5 9.5 5 14.5C5 18.64 8.13 22 12 22C15.87 22 19 18.64 19 14.5C19 9.5 12 2 12 2ZM12 20C9.24 20 7 17.54 7 14.5C7 11.5 9.5 7.5 12 4.5C14.5 7.5 17 11.5 17 14.5C17 17.54 14.76 20 12 20Z"
+            />
+          </svg>
+          United Utilities
+        </a>
+
+        <!-- Secondary nav: Corporate/Business moved here (Rec 1) -->
+        <nav class="secondary-nav" aria-label="Secondary navigation">
+          <a href="#">Corporate</a>
+          <a href="#">Business</a>
+          <a href="#">Developers</a>
+          <a href="#">Careers</a>
+        </nav>
+
+        <!-- Merged account button (Rec 1) -->
+        <a href="#" class="account-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+            />
+          </svg>
+          My Account
+        </a>
+      </div>
+
+      <!-- Primary navigation (Rec 1: residential-focused) -->
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <div class="primary-nav-inner">
+          <div class="nav-links">
+            <a href="#">Your Bill</a>
+            <a href="#">Your Water</a>
+            <a href="#">Moving Home</a>
+            <a href="#">Report a Problem</a>
+            <a href="#">Help &amp; Support</a>
+          </div>
+
+          <!-- Exposed search (Rec 2) -->
+          <div class="search-bar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+            <input
+              type="search"
+              placeholder="Search help, bills, leaks..."
+              aria-label="Search the site"
+            />
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ════════════════════════════════════════════════════════════════════════
+         INCIDENT BANNER (Rec 2: Clear incident checker with buttons)
+         ════════════════════════════════════════════════════════════════════════ -->
+    <aside class="incident-banner" role="alert" aria-live="polite">
+      <div class="incident-banner-inner">
+        <div class="incident-info">
+          <svg class="incident-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
+          </svg>
+          <span class="incident-text">
+            <strong>1 incident</strong> currently affecting your area.
+          </span>
+        </div>
+        <div class="incident-actions">
+          <a href="#" class="btn btn-outline btn-sm">View Details</a>
+          <a href="#" class="btn btn-primary btn-sm">Check My Postcode</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ════════════════════════════════════════════════════════════════════════
+         HERO (Rec 2, 3, 4: Clear postcode checker, primary tasks above fold)
+         ════════════════════════════════════════════════════════════════════════ -->
+    <section class="hero">
+      <div class="hero-inner">
+        <h1>Check for issues in your area</h1>
+        <p>
+          Enter your postcode to see if there are any water supply or wastewater issues affecting your property.
+        </p>
+
+        <!-- Postcode checker (Rec 2: separate input from action) -->
+        <form class="postcode-checker" role="search" aria-label="Postcode checker">
+          <input
+            type="text"
+            placeholder="Enter your postcode (e.g. WA1 1AA)"
+            aria-label="Postcode"
+            autocomplete="postal-code"
+          />
+          <button type="submit" class="btn btn-secondary">Check Now</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════════════
+         MAIN CONTENT
+         ════════════════════════════════════════════════════════════════════════ -->
+    <main id="main-content">
+      <!-- ──────────────────────────────────────────────────────────────────────
+           PRIMARY TASKS (Rec 3: Task-oriented cards, grouped by user goals)
+           ────────────────────────────────────────────────────────────────────── -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">How can we help you today?</h2>
+        </div>
+
+        <div class="task-grid">
+          <!-- Card 1 -->
+          <article class="task-card">
+            <div class="task-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.11-.9-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+              </svg>
+            </div>
+            <h3>Pay Your Bill</h3>
+            <p>Make a payment quickly and securely online. Set up Direct Debit for hassle-free payments.</p>
+            <a href="#" class="btn btn-primary">Pay Now</a>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="task-card">
+            <div class="task-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14h-2v-4H8v-2h2V9h2v2h2v2h-2v4z"/>
+              </svg>
+            </div>
+            <h3>View Your Account</h3>
+            <p>Check your balance, view bills, update your details and manage your water services.</p>
+            <a href="#" class="btn btn-primary">Go to Account</a>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="task-card">
+            <div class="task-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2C12 2 5 9.5 5 14.5C5 18.64 8.13 22 12 22C15.87 22 19 18.64 19 14.5C19 9.5 12 2 12 2Z"/>
+              </svg>
+            </div>
+            <h3>Report a Leak</h3>
+            <p>Spotted a leak or burst pipe? Let us know so we can fix it quickly.</p>
+            <a href="#" class="btn btn-primary">Report Now</a>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="task-card">
+            <div class="task-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              </svg>
+            </div>
+            <h3>Moving Home</h3>
+            <p>Let us know you're moving so we can transfer your account or close it.</p>
+            <a href="#" class="btn btn-primary">Update Address</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────────────────────
+           SAVINGS SECTION (Rec 4: Green for savings)
+           ────────────────────────────────────────────────────────────────────── -->
+      <section class="savings-section">
+        <div class="savings-inner">
+          <h2 class="section-title">Save Water, Save Money</h2>
+
+          <div class="savings-grid">
+            <article class="savings-card">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+              </svg>
+              <h3>Get a Water Meter</h3>
+              <p>Our lowest bill guarantee means you could save money by switching.</p>
+              <a href="#" class="btn btn-secondary">Apply Now</a>
+            </article>
+
+            <article class="savings-card">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2C12 2 5 9.5 5 14.5C5 18.64 8.13 22 12 22C15.87 22 19 18.64 19 14.5C19 9.5 12 2 12 2Z"/>
+              </svg>
+              <h3>Free Water-Saving Kit</h3>
+              <p>Order free gadgets to reduce water use and lower your bills.</p>
+              <a href="#" class="btn btn-secondary">Order Free Kit</a>
+            </article>
+
+            <article class="savings-card">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+              </svg>
+              <h3>Help With Your Bill</h3>
+              <p>Struggling to pay? We have support schemes to help you.</p>
+              <a href="#" class="btn btn-secondary">Get Support</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────────────────────
+           HELP & SUPPORT (Rec 3: Grouped by user goals)
+           ────────────────────────────────────────────────────────────────────── -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Quick Links</h2>
+          <a href="#" class="btn btn-outline btn-sm">View All Help</a>
+        </div>
+
+        <div class="help-grid">
+          <a href="#" class="help-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2C12 2 5 9.5 5 14.5C5 18.64 8.13 22 12 22C15.87 22 19 18.64 19 14.5C19 9.5 12 2 12 2Z"/>
+            </svg>
+            Water quality issues
+          </a>
+          <a href="#" class="help-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+            </svg>
+            No water or low pressure
+          </a>
+          <a href="#" class="help-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.11-.9-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+            </svg>
+            Understand your bill
+          </a>
+          <a href="#" class="help-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+            </svg>
+            Submit a meter reading
+          </a>
+          <a href="#" class="help-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+            </svg>
+            Priority Services
+          </a>
+          <a href="#" class="help-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+            </svg>
+            Contact us
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ════════════════════════════════════════════════════════════════════════
+         FOOTER (Rec 1 & 5: Consistent, accessible)
+         ════════════════════════════════════════════════════════════════════════ -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>Your Account</h4>
+            <ul>
+              <li><a href="#">Log in / Register</a></li>
+              <li><a href="#">Pay your bill</a></li>
+              <li><a href="#">View your bills</a></li>
+              <li><a href="#">Update your details</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Help & Support</h4>
+            <ul>
+              <li><a href="#">Report a leak</a></li>
+              <li><a href="#">Water quality</a></li>
+              <li><a href="#">No water supply</a></li>
+              <li><a href="#">FAQs</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Save Money</h4>
+            <ul>
+              <li><a href="#">Get a water meter</a></li>
+              <li><a href="#">Free water-saving kit</a></li>
+              <li><a href="#">Help paying your bill</a></li>
+              <li><a href="#">Tariffs explained</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>About Us</h4>
+            <ul>
+              <li><a href="#">Our company</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">News</a></li>
+              <li><a href="#">Investors</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span>© United Utilities Group PLC 2026</span>
+          <div class="footer-links">
+            <a href="#">Accessibility</a>
+            <a href="#">Privacy</a>
+            <a href="#">Cookies</a>
+            <a href="#">Terms</a>
+            <a href="#">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

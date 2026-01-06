@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Logo-Based Palette Suggestion – United Utilities</title>
+    <style>
+      :root {
+        /*
+         * SUGGESTED PALETTE (based on United Utilities logo & brand direction)
+         * ─────────────────────────────────────────────────────────────────────
+         */
+
+        /* ───────── Primary ───────── */
+        --primary:        #0078a8;   /* Logo blue – trust, water, professionalism       */
+        --primary-dark:   #005f85;   /* Hover/focus state for primary                   */
+        --primary-light:  #3b9fc9;   /* Lighter variant for large surfaces              */
+
+        /* ───────── Secondary ───────── */
+        --secondary:      #024e43;   /* Deep teal – nature, sustainability, eco theme   */
+        --secondary-dark: #01362e;   /* Darker variant                                   */
+        --secondary-light:#2e7a6e;   /* Lighter variant                                  */
+
+        /* ───────── Accent ───────── */
+        --accent:         #d00068;   /* Magenta – CTAs, urgency, important notices      */
+        --accent-light:   #f0408e;   /* Hover state for accent                           */
+
+        /* ───────── Neutrals ───────── */
+        --white:          #ffffff;
+        --surface:        #f5f7f9;   /* Page background / card background               */
+        --border:         #dce1e6;   /* Subtle dividers                                  */
+        --muted:          #6b7785;   /* Secondary text                                   */
+        --text:           #1e2a36;   /* Primary body text (high contrast)               */
+        --black:          #0d1117;   /* Headings / strong emphasis                       */
+
+        /* ───────── Semantic (optional) ───────── */
+        --success:        #0a8754;   /* Green for positive feedback                      */
+        --warning:        #c57c00;   /* Amber for warnings                               */
+        --error:          #c5221f;   /* Red for errors                                   */
+        --info:           var(--primary);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 32px 24px;
+        background: var(--surface);
+        color: var(--text);
+        line-height: 1.55;
+      }
+
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+        color: var(--black);
+        margin: 0 0 8px;
+      }
+
+      .subtitle {
+        color: var(--muted);
+        margin: 0 0 28px;
+      }
+
+      /* ───────── Palette Grid ───────── */
+      .palette {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 14px;
+        margin-bottom: 36px;
+      }
+
+      .color-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .swatch {
+        height: 80px;
+      }
+
+      .color-info {
+        padding: 12px 14px;
+      }
+
+      .color-name {
+        font-weight: 600;
+        margin: 0 0 4px;
+        color: var(--black);
+      }
+
+      .color-hex {
+        margin: 0;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      /* ───────── Explanation Cards ───────── */
+      .section-title {
+        font-size: 1.15rem;
+        margin: 32px 0 12px;
+        color: var(--black);
+      }
+
+      .explanation {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 18px 20px;
+        margin-bottom: 14px;
+      }
+
+      .explanation h3 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .explanation h3 .dot {
+        width: 18px;
+        height: 18px;
+        border-radius: 4px;
+        flex-shrink: 0;
+      }
+
+      .explanation p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      ul.reasons {
+        margin: 10px 0 0 18px;
+        padding: 0;
+        color: var(--muted);
+      }
+
+      ul.reasons li {
+        margin-bottom: 6px;
+      }
+
+      /* ───────── Demo ───────── */
+      .demo {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: var(--white);
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-dark);
+      }
+
+      .btn-secondary {
+        background: var(--secondary);
+        color: var(--white);
+      }
+
+      .btn-secondary:hover {
+        background: var(--secondary-dark);
+      }
+
+      .btn-accent {
+        background: var(--accent);
+        color: var(--white);
+      }
+
+      .btn-accent:hover {
+        background: var(--accent-light);
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+      }
+
+      .alert {
+        padding: 14px 18px;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+
+      .alert-success {
+        background: color-mix(in srgb, var(--success) 12%, white);
+        color: var(--success);
+      }
+
+      .alert-warning {
+        background: color-mix(in srgb, var(--warning) 14%, white);
+        color: var(--warning);
+      }
+
+      .alert-error {
+        background: color-mix(in srgb, var(--error) 12%, white);
+        color: var(--error);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Suggested Palette (United Utilities Logo-Inspired)</h1>
+      <p class="subtitle">
+        A curated color system derived from the brand's visual identity — optimized for digital UI with accessibility
+        in mind.
+      </p>
+
+      <!-- ════════════════════════════════════════════════════════════════════
+           PALETTE SWATCHES
+           ════════════════════════════════════════════════════════════════════ -->
+      <div class="palette">
+        <div class="color-card">
+          <div class="swatch" style="background: var(--primary)"></div>
+          <div class="color-info">
+            <p class="color-name">Primary</p>
+            <p class="color-hex">#0078a8</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="swatch" style="background: var(--primary-dark)"></div>
+          <div class="color-info">
+            <p class="color-name">Primary Dark</p>
+            <p class="color-hex">#005f85</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="swatch" style="background: var(--primary-light)"></div>
+          <div class="color-info">
+            <p class="color-name">Primary Light</p>
+            <p class="color-hex">#3b9fc9</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="swatch" style="background: var(--secondary)"></div>
+          <div class="color-info">
+            <p class="color-name">Secondary</p>
+            <p class="color-hex">#024e43</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="swatch" style="background: var(--secondary-light)"></div>
+          <div class="color-info">
+            <p class="color-name">Secondary Light</p>
+            <p class="color-hex">#2e7a6e</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="swatch" style="background: var(--accent)"></div>
+          <div class="color-info">
+            <p class="color-name">Accent</p>
+            <p class="color-hex">#d00068</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="swatch" style="background: var(--text)"></div>
+          <div class="color-info">
+            <p class="color-name">Text</p>
+            <p class="color-hex">#1e2a36</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="swatch" style="background: var(--muted)"></div>
+          <div class="color-info">
+            <p class="color-name">Muted</p>
+            <p class="color-hex">#6b7785</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="swatch" style="background: var(--surface)"></div>
+          <div class="color-info">
+            <p class="color-name">Surface</p>
+            <p class="color-hex">#f5f7f9</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="swatch" style="background: var(--border)"></div>
+          <div class="color-info">
+            <p class="color-name">Border</p>
+            <p class="color-hex">#dce1e6</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="swatch" style="background: var(--success)"></div>
+          <div class="color-info">
+            <p class="color-name">Success</p>
+            <p class="color-hex">#0a8754</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="swatch" style="background: var(--warning)"></div>
+          <div class="color-info">
+            <p class="color-name">Warning</p>
+            <p class="color-hex">#c57c00</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════════════════════════════════
+           EXPLANATIONS
+           ════════════════════════════════════════════════════════════════════ -->
+      <h2 class="section-title">Why These Colors?</h2>
+
+      <div class="explanation">
+        <h3><span class="dot" style="background:#0078a8"></span> Primary Blue (#0078a8)</h3>
+        <p>
+          The United Utilities logo features a strong, mid-tone blue that evokes <strong>water</strong>, the company's
+          core product. Blue also conveys <strong>trust, reliability, and professionalism</strong> — essential for a
+          utility provider that customers depend on every day.
+        </p>
+        <ul class="reasons">
+          <li>Directly extracted from the site's most-used brand token.</li>
+          <li>High recognition value — users will immediately associate it with the brand.</li>
+          <li>Works well for buttons, links, and interactive elements (sufficient contrast on white).</li>
+        </ul>
+      </div>
+
+      <div class="explanation">
+        <h3><span class="dot" style="background:#024e43"></span> Secondary Teal (#024e43)</h3>
+        <p>
+          A deep teal/forest-green that appears throughout the site's icons (e.g., "forest-green" water-glass icon). It
+          reinforces themes of <strong>nature, sustainability, and environmental responsibility</strong> — key messages
+          for a water company.
+        </p>
+        <ul class="reasons">
+          <li>Complements the blue without competing for attention.</li>
+          <li>Ideal for eco/sustainability sections, secondary highlights, and callouts.</li>
+          <li>Pairs well with white text for high-contrast badges.</li>
+        </ul>
+      </div>
+
+      <div class="explanation">
+        <h3><span class="dot" style="background:#d00068"></span> Accent Magenta (#d00068)</h3>
+        <p>
+          A vivid magenta used sparingly on the live site for CTAs and attention-grabbing elements. It adds
+          <strong>energy and urgency</strong> without clashing with the calmer blue-teal foundation.
+        </p>
+        <ul class="reasons">
+          <li>High contrast against both blue and teal — perfect for "Pay Now" or alert buttons.</li>
+          <li>Used sparingly so it doesn't dilute brand recognition.</li>
+          <li>Warm hue balances the cool primary palette.</li>
+        </ul>
+      </div>
+
+      <div class="explanation">
+        <h3><span class="dot" style="background:#1e2a36"></span> Neutral Text (#1e2a36)</h3>
+        <p>
+          A dark blue-grey rather than pure black. This softens the page visually, reduces eye strain, and subtly ties
+          the neutrals back to the blue brand family.
+        </p>
+        <ul class="reasons">
+          <li>Exceeds WCAG AA contrast on light backgrounds (≥ 4.5:1).</li>
+          <li>Feels more modern and approachable than stark #000000.</li>
+        </ul>
+      </div>
+
+      <div class="explanation">
+        <h3><span class="dot" style="background:#f5f7f9"></span> Surface & Border (#f5f7f9, #dce1e6)</h3>
+        <p>
+          A slightly cool off-white surface and a gentle blue-tinged border keeps the design feeling fresh and cohesive
+          with the primary blue.
+        </p>
+        <ul class="reasons">
+          <li>Cool undertones tie back to the "water" theme.</li>
+          <li>Prevents the stark look of pure grey neutrals.</li>
+        </ul>
+      </div>
+
+      <div class="explanation">
+        <h3><span class="dot" style="background:linear-gradient(90deg,#0a8754 33%,#c57c00 33%,#c57c00 66%,#c5221f 66%)"></span> Semantic Colors</h3>
+        <p>
+          Success (green), Warning (amber), and Error (red) are chosen for universal recognition and WCAG contrast
+          compliance. They don't appear in the logo but are essential for any UI.
+        </p>
+      </div>
+
+      <!-- ════════════════════════════════════════════════════════════════════
+           LIVE DEMO
+           ════════════════════════════════════════════════════════════════════ -->
+      <h2 class="section-title">Live Demo</h2>
+      <div class="demo">
+        <button class="btn btn-primary">Primary Action</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-accent">Urgent CTA</button>
+        <button class="btn btn-outline">Outline</button>
+      </div>
+
+      <div class="demo" style="flex-direction:column; gap:10px; max-width:420px;">
+        <div class="alert alert-success">✓ Your payment was successful.</div>
+        <div class="alert alert-warning">⚠ Your meter reading is due soon.</div>
+        <div class="alert alert-error">✕ We couldn't process your request.</div>
+      </div>
+    </div>
+  </body>
+</html>
